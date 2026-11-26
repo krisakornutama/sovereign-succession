@@ -24,7 +24,13 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       # sovereign-attest is a peer dependency linked from a sibling checkout until it is on npm,
-      # so CI builds that checkout before installing this package.
+      # and it in turn builds against sovereign-vault, so CI builds both before installing.
+      - name: Fetch and build sovereign-vault
+        run: |
+          git clone --depth 1 https://github.com/krisakornutama/sovereign-vault.git ../sovereign-vault
+          cd ../sovereign-vault
+          npm ci
+          npm run build
       - name: Fetch and build sovereign-attest
         run: |
           git clone --depth 1 https://github.com/krisakornutama/sovereign-attest.git ../sovereign-attest
