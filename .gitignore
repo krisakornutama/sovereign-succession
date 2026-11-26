@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+.succession-data/
+*.tmp-*
+*.log
+.DS_Store
